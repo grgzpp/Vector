@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+
+  postgres:
+    container_name: postgres
+    image: "postgres:13"
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=pguser
+      - POSTGRES_PASSWORD=pgpassword
+      - POSTGRES_DB=pgdb
+
+  web:
+    container_name: web
+    build: 
+      context: web
+    ports:
+      - "3000:3000"
+    environment:
+      - PG_USER=pguser
+      - PG_PASSWORD=pgpassword
+      - PG_DB=pgdb
+      - PG_HOST=postgres
+    depends_on:
+      - postgres
+
