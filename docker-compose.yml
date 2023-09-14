@@ -19,6 +19,9 @@ services:
     ports:
       - "3000:3000"
     environment:
+      - PORT=3000
+      - DECIMAL_DIGITS=2
+      - SECRET_KEY=test_key
       - PG_USER=pguser
       - PG_PASSWORD=pgpassword
       - PG_DB=pgdb

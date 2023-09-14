@@ -3,6 +3,7 @@ import { DataTypes, Model } from "sequelize";
 import Transaction from "./Transaction";
 import User from "./User";
 
+// Enum for event codes
 export enum EventCode {
     Paid = 1,
     Taxed = 2,
@@ -10,6 +11,7 @@ export enum EventCode {
     Deleted = 4
 }
 
+// Event model
 class Event extends Model {
     public id!: number;
     public code!: EventCode;
@@ -35,7 +37,7 @@ Event.init({
     sequelize,
     modelName: 'Event',
     timestamps: true,
-    updatedAt: false
+    updatedAt: false // Events in database should only be created and never updated, so updatedAt is not required
 });
 
 export default Event;

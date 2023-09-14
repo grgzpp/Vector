@@ -8,10 +8,10 @@ const router = express.Router();
 const eventController: EventController = EventController.getInstance();
 
 router
-    .get('/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User, UserLevel.Autority, UserLevel.Admin]), checkOwnershipMiddleware(false), eventController.getEventsByTransactionId)
-    .post('/pay/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User]), eventController.payByTransactionId)
-    .post('/tax/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.Autority, UserLevel.Admin]), eventController.taxByTransactionId)
-    .post('/return/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User]), checkOwnershipMiddleware(), eventController.returnByTransactionId)
-    .post('/delete/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User, UserLevel.Admin]), checkOwnershipMiddleware(), eventController.deleteByTransactionId);
+    .get('/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User, UserLevel.Autority, UserLevel.Admin]), checkOwnershipMiddleware(false), eventController.getEventsByTransactionId) // Get all events related to a transaction
+    .post('/pay/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User]), eventController.payTransactionById) // Pay a transaction
+    .post('/tax/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.Autority, UserLevel.Admin]), eventController.taxTransactionById) // Tax a paid transaction
+    .post('/return/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User, UserLevel.Admin]), checkOwnershipMiddleware(), eventController.returnTransactionById) // Return a paid transaction
+    .post('/delete/:transactionId', checkAuthMiddleware, checkLevelMiddleware([UserLevel.User, UserLevel.Admin]), checkOwnershipMiddleware(), eventController.deleteTransactionById); // Delete a not-paid transaction
 
 export default router;

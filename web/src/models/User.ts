@@ -4,19 +4,21 @@ import bcrypt from 'bcrypt';
 import Transaction from './Transaction';
 import Event from './Event';
 
+// Enum for user levels of privileges
 export enum UserLevel {
     User = 1,
-    Autority = 5,
-    Admin = 10
+    Autority = 2,
+    Admin = 4
 }
 
+// User model
 class User extends Model {
     public id!: string;
     public username!: string;
     public email!: string;
     public password!: string;
     public balance!: number;
-    public level!: number;
+    public level!: UserLevel;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -32,7 +34,7 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
+        validate: { // Username validation
             is: /^(?![.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![.])$/i,
             notEmpty: true,
             len: [6, 16]
@@ -42,7 +44,7 @@ User.init({
         type: DataTypes.STRING,
         allowNull: false,
         unique: true,
-        validate: {
+        validate: { // Email validation
             isEmail: true,
             notEmpty: true
         }
@@ -50,19 +52,20 @@ User.init({
     password: {
         type: DataTypes.STRING,
         allowNull: false,
-        set(value: string) {
+        set(value: string) { // Password validation and hashing during set function
+            // Regex pattern for password validation: 8-20 length, atleast one uppercase letter, one lowercase letter, one digit and one special character
             if(!value.match(/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*+-]).{8,20}$/)) {
-                throw { message: 'Provided password doesn\'t meet validation criteria' };
+                throw { message: 'Provided password does not meet validation criteria' };
             }
             this.setDataValue("password", bcrypt.hashSync(value, 10));
         }
     },
     balance: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.DECIMAL,
         allowNull: false,
         defaultValue: 0,
-        validate: {
-            isInt: true,
+        validate: { // Balance validation
+            isDecimal: true,
             min: 0
         }
     },
@@ -78,6 +81,7 @@ User.init({
     paranoid: true
 });
 
+// User one to many association with Transaction
 User.hasMany(Transaction, {
     as: 'creatorUser',
     foreignKey: 'creatorUserId'
@@ -87,6 +91,7 @@ Transaction.belongsTo(User, {
     foreignKey: 'creatorUserId'
 });
 
+// User one to many association with Event
 User.hasMany(Event, {
     as: 'user',
     foreignKey: 'userId'

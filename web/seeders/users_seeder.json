@@ -1,0 +1,30 @@
+[
+    {
+        "id": "0ca4efde-5354-4688-a788-bd05e78d0066",
+        "username": "test_admin",
+        "email": "test_admin@testmail.com",
+        "password": "Test$password123",
+        "level": 4
+    },
+    {
+        "id": "e064c7ba-8df6-4b73-9b3b-9671cfb6c9ac",
+        "username": "test_autority",
+        "email": "test_autority@testmail.com",
+        "password": "Test$password123",
+        "level": 2
+    },
+    {
+        "id": "39048469-1032-41d0-99a5-192ef1464c54",
+        "username": "test_user",
+        "email": "test_user@testmail.com",
+        "password": "Test$password123",
+        "level": 1
+    },
+    {
+        "id": "1db0d6e4-42c9-49bc-b772-3b447bf25c47",
+        "username": "test_user2",
+        "email": "test_user2@testmail.com",
+        "password": "Test$password123",
+        "level": 1
+    }
+]
