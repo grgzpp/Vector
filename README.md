@@ -4,6 +4,7 @@ Vector is an online payment system designed with the aim of surpassing the secur
 ## Index
 - [Concept](#concept)
 - [Project Purpose](#project-purpose)
+- [Dependencies](#dependencies)
 - [Project Design](#project-design)
   - [UML Diagrams](#uml-diagrams)
   - [Patterns](#patterns)
@@ -23,7 +24,12 @@ Therefore, the natural payment dynamics require a digital device, such as our co
 Vector offers the possibility to create an account easily and quickly. Note that the account creation process is simplified here, similar to registering on any website with an email and password, even without an email confirmation system. In a real-world application, the account creation process should be managed by the responsible bank for the circuit. Users can create transactions when they need to receive money for any sale or service, specifying the amount and purpose of the transaction. Subsequently, a simple transaction identification code is communicated to the payer, for example, via NFC or another method. This allows the payer to review the transaction details and decide whether to confirm the payment. Confirmation is done through digital signatures, and no sensitive data leaves the user's device. This restores the natural and secure payment dynamics described earlier. Additionally, functionalities are provided for transaction control and taxation by a privileged user, defined as an Authority, and the possibility of refunding money from a received transaction, which is a typical situation in product returns.
 
 ## Project Purpose
-The purpose of Vector is to provide an efficient and scalable service for use as a foundation to build an actual online payment circuit by a bank. The project consists of a Node.js backend web server connected to a PostgreSQL database, both containerized using Docker.
+The purpose of Vector is to provide an efficient and scalable service for use as a foundation to build an actual online payment circuit by a bank. 
+
+The project consists of a Node.js backend web server connected to a PostgreSQL database, both containerized using Docker.
+
+## Dependencies
+Vector relates on [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) to run. The [Node.js](https://nodejs.org/) web server depends on: [Express](https://expressjs.com/), [Sequelize](https://sequelize.org/), [PostgreSQL](https://www.postgresql.org/), [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), [bcrypt](https://www.npmjs.com/package/bcrypt), [morgan](https://www.npmjs.com/package/morgan), [speakeasy](https://www.npmjs.com/package/speakeasy) and [qrcode](https://www.npmjs.com/package/qrcode) (not needed in production as it would be a client-side display operation). All the dependencies will be automatically installed in the container of the web server using Docker: go to [Project Setup with Docker](#project-setup-with-docker) section for more information.
 
 ## Project Design
 
@@ -33,6 +39,7 @@ UML diagrams used for project design.
 #### Use-cases Diagrams
 
 In the use-cases diagrams are represent the ways in which users at various levels can access the application's resources.
+
 ![Use-cases Diagram Users](./figures/use_cases_users.png)
 
 ![Use-cases Diagram Transactions](./figures/use_cases_transactions.png)
@@ -69,7 +76,7 @@ This behavioral pattern is implemented using middlewares, that ensure authentica
 ## Project Setup with Docker
 The project is easily executable using the docker-compose orchestrator:
 
-1. Install docker and docker-compose
+1. Install [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) in your system
 
 2. Clone this repository
 
@@ -94,23 +101,24 @@ The project is easily executable using the docker-compose orchestrator:
     ```
 
 ## Testing with Postman
-In the repository there is also a Postman collection that can be imported which will give you a list of calls useful for testing all the features of Vector:
+In the repository there is also a Postman collection and environment that can be imported. It will give you a list of calls useful for testing all the features of Vector:
 
-1. Install Postman in your system (https://www.postman.com/downloads/)
+1. Install [Postman](https://www.postman.com/downloads/) in your system
 
 2. Open Postman and click _Import_
 
-3. Search for _Vector.postman_collection.json_ file, located in the _postman_ folder of the cloned repository
+3. Search for _postman_ folder of the cloned repository and import it. It should import a collection and an environment.
 
 The same calls can be made using other programs, such as _curl_ directly from the terminal, but it is certainly less comfortable than using Postman.
 
-Furthermore, importing the collection on Postman you will also have the Vector Environment, where there are the fields to insert the access tokens of the example users created in the database seeding. It is recommended to log in with all test users (the password is the same), register the token in the environment for every user and start making test calls.
+In the imported Vector Environment there are fields to insert the access tokens of the example users created in the database seeding. It is recommended to log in with all the test users (the password is the same and it is already written in the login body), register the token in the environment for every user and start making test calls.
 
 ## API Documentation
 
 ### Root
 
 **Login**
+
 Log in the user.
 
 Route:
@@ -136,6 +144,7 @@ Response:
 ```
 
 **Get balance** (User)
+
 Get the balance of the logged in user.
 
 Route: 
@@ -153,6 +162,7 @@ Response:
 ```
 
 **Get balance of a specific user** (Autority, Admin)
+
 Get the balance of a specific user.
 
 Route: 
@@ -170,6 +180,7 @@ Response:
 ```
 
 **Set balance of a specific user** (Admin)
+
 Set the balance of a specific user.
 
 Route: 
@@ -195,6 +206,7 @@ Response:
 ```
 
 **Increment balance of a specific user** (Admin)
+
 Increment the balance of a specific user by a certain amount.
 
 Route: 
@@ -220,6 +232,7 @@ Response:
 ```
 
 **Decrement balance of a specific user** (Admin)
+
 Decrement the balance of a specific user by a certain amount.
 
 Route: 
@@ -247,6 +260,7 @@ Response:
 ### Users
 
 **Get user**
+
 Get information of the logged in user.
 
 Route:
@@ -266,6 +280,7 @@ Response:
 ```
 
 **Get a specific user** (Autority, Admin)
+
 Get information of a specific user by username. It also returns user UUID, useful for other privileged operations requiring it.
 
 Route:
@@ -281,11 +296,12 @@ Response:
     "username": "test_user",
     "email": "test_user@testmail.com",
     "level": "User",
-	"id": "39048469-1032-41d0-99a5-192ef1464c54"
+    "id": "39048469-1032-41d0-99a5-192ef1464c54"
 }
 ```
 
 **Create user**
+
 Create a new user.
 
 Route: 
@@ -314,6 +330,7 @@ Response:
 ```
 
 **Create autority** (Admin)
+
 Create a new autority.
 
 Route: 
@@ -342,6 +359,7 @@ Response:
 ```
 
 **Update user**
+
 Update information of the logged in user.
 
 Route: 
@@ -369,6 +387,7 @@ Response:
 ```
 
 **Update a specific user** (Admin)
+
 Update information of a specific user.
 
 Route: 
@@ -395,7 +414,26 @@ Response:
 }
 ```
 
+**Update OTP secret for a specific user** (Admin)
+
+Update information of a specific user.
+
+Route: 
+```bash
+PUT /users/otp/{userId}
+```
+
+Authorization: Bearer {token}
+
+Response: 
+```json
+{
+    "otpSecret": "HQZGEQLENVTTKMBSGU3GIMRWKBKXEP3WNRZC6LTBGMSDMVBTNNJA"
+}
+```
+
 **Delete user**
+
 Soft-delete the logged in user.
 
 Route:
@@ -415,6 +453,7 @@ Response:
 ```
 
 **Delete a specific user** (Admin)
+
 Soft-delete a specific user.
 
 Route:
@@ -436,6 +475,7 @@ Response:
 ### Transactions
 
 **Get transaction**
+
 Get a specific transaction, in the case of user only its own.
 
 Route:
@@ -457,6 +497,7 @@ Response:
 ```
 
 **Get transactions history**
+
 Get the transaction history of the logged in user, including soft-deleted ones.
 
 Route:
@@ -487,6 +528,7 @@ Response:
 ```
 
 **Get transactions history of a specific user** (Autority, Admin)
+
 Get the transaction history of a specific user, including soft-deleted ones.
 
 Route:
@@ -517,6 +559,7 @@ Response:
 ```
 
 **Create transaction**
+
 Create a new transaction, specifying amount and reason.
 
 Route:
@@ -548,6 +591,7 @@ Response:
 ### Events
 
 **Get events by transaction**
+
 Get all the events relating to a specific transaction, in the case of user only its own.
 
 Route:
@@ -585,6 +629,7 @@ Response:
 ```
 
 **Pay transaction** (User)
+
 Pay a transaction (records the event and moves the money).
 
 Route:
@@ -593,6 +638,13 @@ POST /events/pay/{transactionId}
 ```
 
 Authorization: Bearer {token}
+
+Body: 
+```json
+{
+    "otp": "076880"
+}
+```
 
 Response:
 ```json
@@ -606,6 +658,7 @@ Response:
 ```
 
 **Tax transaction** (Autority, Admin)
+
 Set a transaction as taxed (no further action is actually performed).
 
 Route:
@@ -627,6 +680,7 @@ Response:
 ```
 
 **Return transaction** (User, Admin)
+
 Return the money from an already paid transaction to the sender (records the event and moves the money).
 
 Route:
@@ -635,6 +689,13 @@ POST /events/return/{transactionId}
 ```
 
 Authorization: Bearer {token}
+
+Body: 
+```json
+{
+    "otp": "076880"
+}
+```
 
 Response:
 ```json
@@ -648,6 +709,7 @@ Response:
 ```
 
 **Delete transaction** (User, Admin)
+
 Soft-delete an unpaid transaction, in the case of user only its own.
 
 Route:
@@ -667,3 +729,4 @@ Response:
     "date": "Sun Jan 01 2023 12:50:30 GMT+0000 (Coordinated Universal Time)"
 }
 ```
+

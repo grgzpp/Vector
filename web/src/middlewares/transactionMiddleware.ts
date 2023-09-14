@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { StatusCodes } from 'http-status-codes';
+import speakeasy from 'speakeasy';
 import TransactionController from '../controllers/TransactionController';
 import { UserLevel } from '../models/User';
 
@@ -15,7 +16,7 @@ const checkOwnershipMiddleware = (paranoid: boolean = true) => {
         const transaction = await transactionController.findById(request.params.transactionId, false, paranoid);
         if(transaction) {
             //Switch case for future implementations of more user levels
-            // Parameter userLevel from checkLevel middleware, required to be used first to get the user level
+            // Parameter userLevel from checkLevelMiddleware, required to be used first to get the user level
             switch((request as any).userLevel) {
                 // Check ownership of the transaction if User
                 case UserLevel.User:
@@ -34,4 +35,28 @@ const checkOwnershipMiddleware = (paranoid: boolean = true) => {
     }
 }
 
-export { checkOwnershipMiddleware }
+/**
+ * Verify the OTP specified in the request. 
+ * The two factor authentication with OTP is required for every action on transactions.
+*/
+const checkOtpMiddleware = async (request: Request, response: Response, next: NextFunction) => {
+    if(request.body && request.body.otp) {
+        const otpSecret = (request as any).otpSecret;
+        if(otpSecret) {
+            // Verify OTP
+            if(speakeasy.totp.verify({ secret: otpSecret, encoding: 'base32', token: request.body.otp })) {
+                // Successfully verified OTP
+                next();
+            } else {
+                // OTP verification failed
+                return response.status(StatusCodes.UNAUTHORIZED).json({ message: 'OTP verification failed' });
+            }
+        } else {
+            return response.status(StatusCodes.UNAUTHORIZED).json({ message: 'OTP not set for this user. Please contact the administration to set it' });
+        }
+    } else {
+        return response.status(StatusCodes.BAD_REQUEST).send({ message: 'OTP not provided' });
+    }
+}
+
+export { checkOwnershipMiddleware, checkOtpMiddleware }

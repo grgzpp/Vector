@@ -15,6 +15,8 @@ const checkLevelMiddleware = (allowedLevels: UserLevel[]) => {
             if(allowedLevels.includes(user.level)) {
                 // Add userLevel to the request to be eventually used in checkOwnershipMiddleware
                 (request as any).userLevel = user.level;
+                // Add otpSecret to the request to be eventually used in checkOtpMiddleware
+                (request as any).otpSecret = user.otpSecret;
                 next();
             } else {
                 // User unauthorized to make this request

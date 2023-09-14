@@ -2,6 +2,8 @@ import { Request, Response, NextFunction } from 'express';
 import User from '../models/User';
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt';
+import speakeasy from 'speakeasy';
+import qrcode from 'qrcode';
 import { StatusCodes } from 'http-status-codes';
 import { ValidationError } from 'sequelize';
 import { UserLevel } from '../models/User';
@@ -39,6 +41,24 @@ class UserController {
     public findBalance = async (id: string) => {
         const user: User | null = await this.findById(id);
         return user ? user.balance : -1;
+    }
+
+    /** Generate base32 OTP secret and show the relative QRCode. */
+    private generateOtpSecret(email: string): string {
+        // Generate OTP secret
+        const otpSecret = speakeasy.generateSecret();
+        // The next two steps are unnecessary in production, as the client application will display this qrcode from the base32 secret received in response
+        // Generate a Google Authenticator-compatible otpauth:// URL for passing the secret to a mobile device to install the secret
+        const otpauthURL: string = speakeasy.otpauthURL({ 
+            secret: otpSecret.ascii, 
+            label: email,
+            issuer: 'Vector'
+        });
+        // Display otpauth URL as QRCode
+        qrcode.toString(otpauthURL, {type: 'terminal'}, function (err, url) {
+            console.log(url);
+        });
+        return otpSecret.base32;
     }
 
     /** 
@@ -106,14 +126,22 @@ class UserController {
             const body = request.body;
 
             try {
+                const email: string = body.email;
+                // Generate OTP secret
+                const otpSecret: string = this.generateOtpSecret(email);
                 // Create a new user with the provided data and return their details in the response
                 const user = await User.create({
                     username: body.username,
-                    email: body.email,
+                    email: email,
                     password: body.password,
-                    level: level
+                    level: level,
+                    otpSecret: otpSecret
                 });
-                return response.status(StatusCodes.CREATED).json(this.responseJson(user));
+                
+                const responseJson: any = this.responseJson(user);
+                // Append OTP secret to response
+                responseJson.otpSecret = otpSecret;
+                return response.status(StatusCodes.CREATED).json(responseJson);
             } catch(error) {
                 if(error instanceof ValidationError) {
                     return response.status(StatusCodes.BAD_REQUEST).json({ message: error.errors[0].message });
@@ -205,6 +233,24 @@ class UserController {
                     return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
                 }
             }
+        }
+    }
+
+    /** Update a user OTP secret by UUID. Only available for Admin. */
+    public updateOtpSecretById =  async (request: Request, response: Response, next: NextFunction) => {
+        const userId: string = request.params.userId;
+
+        try {
+            const user = await this.findById(userId);
+            if(user) {
+                const otpSecret: string = this.generateOtpSecret(user.email);
+                await user.update({ otpSecret: otpSecret });
+                return response.status(StatusCodes.OK).json({ 'otpSecret': otpSecret });
+            } else {
+                return response.status(StatusCodes.NOT_FOUND).json({ message: 'User not found' });
+            }
+        } catch(error) {
+            return response.status(StatusCodes.INTERNAL_SERVER_ERROR).json(error);
         }
     }
     

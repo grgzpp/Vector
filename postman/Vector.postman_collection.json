@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "fce4e126-b60d-4290-9801-e967c6466807",
+		"_postman_id": "d5f42c77-e0f8-4e78-9431-5f88e67b014c",
 		"name": "Vector",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26382573"
@@ -24,12 +24,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/login",
-							"protocol": "http",
+							"raw": "{{base_url}}/login",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"login"
 							]
@@ -53,12 +51,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/balance",
-							"protocol": "http",
+							"raw": "{{base_url}}/balance",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"balance"
 							]
@@ -82,12 +78,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/balance/39048469-1032-41d0-99a5-192ef1464c54",
-							"protocol": "http",
+							"raw": "{{base_url}}/balance/39048469-1032-41d0-99a5-192ef1464c54",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"balance",
 								"39048469-1032-41d0-99a5-192ef1464c54"
@@ -121,12 +115,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/balance/39048469-1032-41d0-99a5-192ef1464c54",
-							"protocol": "http",
+							"raw": "{{base_url}}/balance/39048469-1032-41d0-99a5-192ef1464c54",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"balance",
 								"39048469-1032-41d0-99a5-192ef1464c54"
@@ -160,12 +152,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/deposit/39048469-1032-41d0-99a5-192ef1464c54",
-							"protocol": "http",
+							"raw": "{{base_url}}/deposit/39048469-1032-41d0-99a5-192ef1464c54",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"deposit",
 								"39048469-1032-41d0-99a5-192ef1464c54"
@@ -199,12 +189,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/withdraw/39048469-1032-41d0-99a5-192ef1464c54",
-							"protocol": "http",
+							"raw": "{{base_url}}/withdraw/39048469-1032-41d0-99a5-192ef1464c54",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"withdraw",
 								"39048469-1032-41d0-99a5-192ef1464c54"
@@ -234,12 +222,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								""
@@ -264,12 +250,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/test_user",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/test_user",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"test_user"
@@ -293,12 +277,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								""
@@ -332,12 +314,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/autority",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/autority",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"autority"
@@ -371,12 +351,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								""
@@ -410,14 +388,41 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/users/39048469-1032-41d0-99a5-192ef1464c54",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/39048469-1032-41d0-99a5-192ef1464c54",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
+								"39048469-1032-41d0-99a5-192ef1464c54"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateOtpSecretById (admin)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/users/otp/39048469-1032-41d0-99a5-192ef1464c54",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"users",
+								"otp",
 								"39048469-1032-41d0-99a5-192ef1464c54"
 							]
 						}
@@ -440,12 +445,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								""
@@ -470,12 +473,10 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/users/76b5dbb6-e4f0-4bc1-b649-240bb2262457",
-							"protocol": "http",
+							"raw": "{{base_url}}/users/76b5dbb6-e4f0-4bc1-b649-240bb2262457",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
 								"76b5dbb6-e4f0-4bc1-b649-240bb2262457"
@@ -505,12 +506,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transactions/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/transactions/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"transactions",
 								"3a8084d8-1777-413e-9c92-793d3db896ef"
@@ -520,7 +519,7 @@
 					"response": []
 				},
 				{
-					"name": "getTransactionsBetweenInterval",
+					"name": "getHistory",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -535,12 +534,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transactions/history/1694440801000-1694448001000",
-							"protocol": "http",
+							"raw": "{{base_url}}/transactions/history/1694440801000-1694448001000",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"transactions",
 								"history",
@@ -551,7 +548,7 @@
 					"response": []
 				},
 				{
-					"name": "getTransactionsBetweenIntervalSpecificUser",
+					"name": "getHistorySpecificUser (autority, admin)",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -566,12 +563,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transactions/history/1693900801000-1693911601000/976a01e3-deac-4eb8-aef4-7077fec86154",
-							"protocol": "http",
+							"raw": "{{base_url}}/transactions/history/1693900801000-1693911601000/976a01e3-deac-4eb8-aef4-7077fec86154",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"transactions",
 								"history",
@@ -607,12 +602,10 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/transactions/",
-							"protocol": "http",
+							"raw": "{{base_url}}/transactions/",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"transactions",
 								""
@@ -642,12 +635,10 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/events/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/events/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"events",
 								"3a8084d8-1777-413e-9c92-793d3db896ef"
@@ -671,13 +662,20 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"otp\": \"076880\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/events/pay/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/events/pay/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"events",
 								"pay",
@@ -703,12 +701,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/events/tax/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/events/tax/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"events",
 								"tax",
@@ -733,13 +729,20 @@
 						},
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"otp\": \"534782\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://localhost:3000/events/return/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/events/return/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"events",
 								"return",
@@ -765,12 +768,10 @@
 						"method": "POST",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/events/delete/3a8084d8-1777-413e-9c92-793d3db896ef",
-							"protocol": "http",
+							"raw": "{{base_url}}/events/delete/3a8084d8-1777-413e-9c92-793d3db896ef",
 							"host": [
-								"localhost"
+								"{{base_url}}"
 							],
-							"port": "3000",
 							"path": [
 								"events",
 								"delete",

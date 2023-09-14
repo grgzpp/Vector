@@ -18,13 +18,17 @@
         "username": "test_user",
         "email": "test_user@testmail.com",
         "password": "Test$password123",
-        "level": 1
+        "level": 1,
+        "balance": 500.00,
+        "otpSecret": "ORLWCMCSH4YCI3DHPV2HOUBFONLC4IJIEVWCCSB3MRFUWSSRJR5A"
     },
     {
         "id": "1db0d6e4-42c9-49bc-b772-3b447bf25c47",
         "username": "test_user2",
         "email": "test_user2@testmail.com",
         "password": "Test$password123",
-        "level": 1
+        "level": 1,
+        "balance": 500.00,
+        "otpSecret": "PFIWCR3YFROWOXLEGYRSMQCVN4XXGRDFPBHGIUDGLA4SKZZ7MMXQ"
     }
 ]

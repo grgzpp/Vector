@@ -8,9 +8,9 @@ services:
     ports:
       - "5432:5432"
     environment:
-      - POSTGRES_USER=pguser
-      - POSTGRES_PASSWORD=pgpassword
-      - POSTGRES_DB=pgdb
+      - POSTGRES_USER=${PG_USER}
+      - POSTGRES_PASSWORD=${PG_PASSWORD}
+      - POSTGRES_DB=${PG_DB}
 
   web:
     container_name: web
@@ -19,13 +19,13 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - PORT=3000
-      - DECIMAL_DIGITS=2
-      - SECRET_KEY=test_key
-      - PG_USER=pguser
-      - PG_PASSWORD=pgpassword
-      - PG_DB=pgdb
-      - PG_HOST=postgres
+      - PORT=${SERVER_PORT}
+      - DECIMAL_DIGITS=${DECIMAL_DIGITS}
+      - SECRET_KEY=${SECRET_KEY}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_DB=${PG_DB}
+      - PG_HOST=${PG_HOST}
     depends_on:
       - postgres
 

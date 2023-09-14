@@ -19,6 +19,7 @@ class User extends Model {
     public password!: string;
     public balance!: number;
     public level!: UserLevel;
+    public otpSecret!: string;
     public readonly createdAt!: Date;
     public readonly updatedAt!: Date;
 }
@@ -73,6 +74,9 @@ User.init({
         type: DataTypes.INTEGER,
         defaultValue: UserLevel.User,
         allowNull: false
+    },
+    otpSecret: {
+        type: DataTypes.STRING
     }
 }, {
     sequelize,
