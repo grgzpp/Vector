@@ -1,5 +1,5 @@
 # Vector
-Vector is an online payment system designed with the aim of surpassing the security limitations of current payment circuits that involve the use of physical credit or debit cards.
+Vector is an online payment system designed with the aim of overcome the security limitations of current payment circuits that involve the use of physical credit or debit cards.
 
 ## Index
 - [Concept](#concept)
@@ -47,11 +47,15 @@ In the use-cases diagrams are represent the ways in which users at various level
 #### Sequence Diagrams
 In the sequence diagrams can be observed which layers of the application are used in series and which in parallel during the calls. These diagrams were made for the application's two most important calls: creating and paying a transaction:
 
+**Sequence Diagram of Create Transaction**
+
 ![Sequence Diagram Create Transaction](./figures/sequence_create_transaction.png)
+
+**Sequence Diagram of Pay Transaction**
 
 ![Sequence Diagram Pay Transaction](./figures/sequence_pay_transaction.png)
 
-**Classes Diagram**
+#### Classes Diagram
 ![Classes Diagram](./figures/classes_diagram.png)
 
 ### Patterns
@@ -68,10 +72,10 @@ This is the architectural pattern used for the project. It allows to separate pr
 DAO (Data Access Object) pattern is implemented with Sequelize and Postgres. It simplifies database communication and CRUD operations, defines data models and offers many utilities regarding data validation and associations between database resources.
 
 #### Singleton
-This pattern has been used for the controllers, which are used during calls for interacting with the models (MVVM pattern) and by the various middlewares for authentication and checkings. This ensures that there is only one instance for each controller, despite their use occurrs from various points in the application.
+This pattern has been used for the controllers, which are employed during calls for interacting with the models (MVVM pattern) and by the various middlewares for authentication and checkings. This ensures that there is only one instance for each controller, despite their use occurrs from various points in the application.
 
 #### COR (Chain Of Responsibility)
-This behavioral pattern is implemented using middlewares, that ensure authentication, privileges checking and ownership checking, following a sequential logic. Their use is essential to achieve a scalable and secure system for all calls. For example, the middleware used for privilege checking allows to easily provide a list of which levels of users can perform a specific request.
+This behavioral design pattern is implemented using middlewares, that ensure authentication, privileges checking and ownership checking, following a sequential logic. Their use is essential to achieve a scalable and secure system for all calls. For example, the middleware used for privilege checking allows to easily provide a list of which levels of users can perform a specific request.
 
 ## Project Setup with Docker
 The project is easily executable using the docker-compose orchestrator:
@@ -101,7 +105,7 @@ The project is easily executable using the docker-compose orchestrator:
     ```
 
 ## Testing with Postman
-In the repository there is also a Postman collection and environment that can be imported. It will give you a list of calls useful for testing all the features of Vector:
+In the repository there are also a Postman collection and an environment that can be imported. It will give you a list of calls useful for testing all the features of Vector:
 
 1. Install [Postman](https://www.postman.com/downloads/) in your system
 
@@ -642,7 +646,7 @@ Authorization: Bearer {token}
 Body: 
 ```json
 {
-    "otp": "076880"
+    "otp": "123456"
 }
 ```
 
@@ -693,7 +697,7 @@ Authorization: Bearer {token}
 Body: 
 ```json
 {
-    "otp": "076880"
+    "otp": "123456"
 }
 ```
 

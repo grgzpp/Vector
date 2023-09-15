@@ -664,7 +664,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"otp\": \"076880\"\n}",
+							"raw": "{\n    \"otp\": \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -731,7 +731,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"otp\": \"534782\"\n}",
+							"raw": "{\n    \"otp\": \"123456\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
