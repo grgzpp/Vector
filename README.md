@@ -21,7 +21,7 @@ Consider what happens when making a cash payment in a store: the seller informs 
 
 Therefore, the natural payment dynamics require a digital device, such as our computers or, better yet, smartphones, which we always carry with us when we are out and need to make payments. In fact, recently, carrying a physical card has become inconvenient, and people prefer to use its digital version through applications, using NFC. While this doesn't solve the fundamental issue of physical cards described earlier, it adds an additional advantage to a cardless system like Vector. A similar payment method is employed in bank transfers, where each user has an account, and sensitive information is never shared but payments are initiated to recipients. However, this system is not used for small daily payments because it has long processing times, which are incompatible with the requirements of a payment circuit for such transactions. Furthermore, the amount initiated is determined by the sender of the transaction, potentially leading to errors, while the recipient, who usually knows the exact payment amount, is the one who typically provides the product or service for sale.
 
-Vector offers the possibility to create an account easily and quickly. Note that the account creation process is simplified here, similar to registering on any website with an email and password, even without an email confirmation system. In a real-world application, the account creation process should be managed by the responsible bank for the circuit. Users can create transactions when they need to receive money for any sale or service, specifying the amount and purpose of the transaction. Subsequently, a simple transaction identification code is communicated to the payer, for example, via NFC or another method. This allows the payer to review the transaction details and decide whether to confirm the payment. Confirmation is done through digital signatures, and no sensitive data leaves the user's device. This restores the natural and secure payment dynamics described earlier. Additionally, functionalities are provided for transaction control and taxation by a privileged user, defined as an Authority, and the possibility of refunding money from a received transaction, which is a typical situation in product returns.
+Vector offers the possibility to create an account easily and quickly. Note that the account creation process is simplified here, similar to registering on any website with an email and password, even without an email confirmation system. In a real-world application, the account creation process should be managed by the responsible bank for the circuit. Users can create transactions when they need to receive money for any sale or service, specifying the amount and purpose of the transaction. Subsequently, a simple transaction identification code is communicated to the payer, for example, via NFC or another method. This allows the payer to review the transaction details and decide whether to confirm the payment. Confirmation is done through digital signatures, and no sensitive data leaves the user's device. OTP two factor authentication is also implemented for safety purposes. This restores the natural and secure payment dynamics described earlier. Additionally, functionalities are provided for transaction control and taxation by a privileged user, defined as an Authority, and the possibility of refunding money from a received transaction, which is a typical situation in product returns.
 
 ## Project Purpose
 The purpose of Vector is to provide an efficient and scalable service for use as a foundation to build an actual online payment circuit by a bank. 
@@ -634,7 +634,7 @@ Response:
 
 **Pay transaction** (User)
 
-Pay a transaction (records the event and moves the money).
+Pay a transaction (records the event and moves the money). It requires OTP two factor authentication.
 
 Route:
 ```bash
@@ -685,7 +685,7 @@ Response:
 
 **Return transaction** (User, Admin)
 
-Return the money from an already paid transaction to the sender (records the event and moves the money).
+Return the money from an already paid transaction to the sender (records the event and moves the money). It requires OTP two factor authentication.
 
 Route:
 ```bash
